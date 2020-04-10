@@ -1,0 +1,24 @@
+{
+  "name": "spotify-data-fetcher",
+  "author": "Jason Brooks and Kevin Hassenfratz",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engineStrict": true,
+  "engines": {
+    "node": "10.15.3",
+    "npm": "6.4.1"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "spotify-web-api-node": "4.0.0"
+  },
+  "devDependencies": {
+    "@starryinternet/eslint-config-starry": "9.2.0",
+    "@starryinternet/eslint-plugin-starry": "7.3.8"
+  }
+}
