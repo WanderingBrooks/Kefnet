@@ -28,8 +28,8 @@ class SpotifyAPI {
     return body;
   }
 
-  async getTracksOfPlaylist( playlistID ) {
-    const { body } = await this.api.getPlaylistTracks( playlistID );
+  async getTracksOfPlaylist( playlistID, options ) {
+    const { body } = await this.api.getPlaylistTracks( playlistID, options );
 
     return body;
   }

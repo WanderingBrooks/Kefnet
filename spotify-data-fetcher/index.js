@@ -7,12 +7,6 @@ const GENRES_TO_USE = [
   'rock'
 ];
 
-const OTHER_GENRES = [
-  'hip hop',
-  'rnb',
-  'indie'
-];
-
 const PLAYLIST_IDS = [
   // Easy to classify
   '37i9dQZF1DXcBWIGoYBM5M', // Todays top hits
@@ -22,40 +16,75 @@ const PLAYLIST_IDS = [
   // More abstract
   '37i9dQZF1DWSTeI2WWFaia', // Spilled Ink (Lyrical Lofi and Lowlife raps)
   '37i9dQZF1DWWqNV5cS50j6', // Anti Pop
-  '54HYKeuOBm0CYSJPKHwYEt' // TikTok Songs
+  '54HYKeuOBm0CYSJPKHwYEt', // TikTok Songs
+  '37i9dQZF1DWZjmJmeiazwd' // Rock gaming
 ];
 
 const sleep = ms => new Promise( resolve => setTimeout( resolve, ms ) );
 const tracksToUse = [];
+const seenSongs = {};
+const genreCount = {};
 
 const fetch = async() => {
+  // Wait for token from Spotify
   await sleep( 1000 );
 
   for ( const playlistID of PLAYLIST_IDS ) {
     console.log( playlistID );
-    const { items } = await fetcher.getTracksOfPlaylist( playlistID );
-    const tracks = items.map( ({ track }) => ({
-      trackID: track.id,
-      name: track.name,
-      artistID: track.artists[ 0 ].id,
-      artistName: track.artists[ 0 ].name
-    }) );
+
+    let tracksSeen = 0;
+    let total      = Infinity;
+    let items      = [];
+    const tracks   = [];
+
+    while ( tracksSeen < total ) {
+      ( { items, total } = await fetcher.getTracksOfPlaylist(
+        playlistID,
+        { limit: 100, offset: tracksSeen }
+      ) );
+
+      tracksSeen += items.length;
+
+      tracks.push(
+        ...items.reduce( ( reduced, { track } ) => {
+          if ( track && !seenSongs[ track.id ]  ) {
+            seenSongs[ track.id ] = true;
+            reduced.push({
+              trackID: track.id,
+              name: track.name,
+              artistID: track.artists[ 0 ].id,
+              artistName: track.artists[ 0 ].name
+            });
+          }
+
+          return reduced;
+        }, [] )
+      );
+    }
+
+    console.log( `  To Fetch: ${ tracks.length }` );
 
     let i = 0;
-    for ( const track of  tracks ) {
+    process.stdout.write(`  `);
+    for ( const track of tracks ) {
+      if ( i < tracks.length - 1 ) {
+        process.stdout.write( `${ i + 1 }, ` );
+      } else {
+        process.stdout.write( `${ i + 1 }\n\n` );
+      }
+
       if ( i % 10 === 0 ) {
-        console.log('waiting');
-        await sleep( 1000 );
+        await sleep( 1500 );
       }
 
       i++;
-      const infoOnArtistPromise = fetcher.getInfoOnArtsist( track.artistID );
+      const infoOnArtistPromise    = fetcher.getInfoOnArtsist( track.artistID );
       const featuresOfTrackPromise = fetcher.getAudioFeaturesForTrack( track.trackID );
 
       try {
         const [
           infoOnArtist,
-          audioFeaturesOfTrack
+          { type, id, uri, track_href, analysis_url, ...audioFeaturesOfTrack }
         ] = await Promise.all([ infoOnArtistPromise, featuresOfTrackPromise ])
         .catch( e => { throw e; } );
 
@@ -72,20 +101,27 @@ const fetch = async() => {
               return genre;
             }
           }
+
+          return reduced;
         }, '' );
 
         if ( track.genre !== '' ) {
           tracksToUse.push( track );
+
+          if ( genreCount[ track.genre ] ) {
+            genreCount[ track.genre ] += 1;
+          } else {
+            genreCount[ track.genre ] = 1;
+          }
         }
-      } catch ( e ) {
-        console.error( e );
-      }
+      } catch ( e ) {}
     }
   }
 
-  console.log( tracksToUse.length );
+  console.log( `Total tracks: ${ tracksToUse.length }` );
+  console.log( genreCount );
 
-  fs.writeFileSync( './audio-features.json', JSON.stringify( tracksToUse ) );
+  fs.writeFileSync( './audio-features.json', JSON.stringify( tracksToUse, null, 2 ) );
 
   process.exit( 1 );
 };
