@@ -40,6 +40,8 @@ for song in data:
 
   # Objects for holding song data
   song_json = {}
+  song_json["Title"] = song['name'];
+  song_json["Genre"] = song['genre'];
   song_json["Lyrics"] = [];
   song_json["Words"] = [];
 
