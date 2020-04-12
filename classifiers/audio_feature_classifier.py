@@ -24,8 +24,9 @@ def get_labels_and_lyrics(data):
   lyrics = []
 
   for track in data:
-    labels.append(track['Genre'])
-    lyrics.append(track['Lyrics'])
+    if isinstance(track['Lyrics'], str):
+      lyrics.append(track['Lyrics'])
+      labels.append(track['Genre'])
   return labels, lyrics
 
 f = open("../spotify-data-fetcher/audio-features.json", "r")
@@ -58,12 +59,9 @@ b = open("../genius-scraper/bag_of_words.json", "r")
 bag_of_words_data = json.loads(b.read())
 labels, lyrics = get_labels_and_lyrics(bag_of_words_data)
 
-print(lyrics[0])
-
-
 count_vect = CountVectorizer()
 tfidf_transformer = TfidfTransformer()
-X_train_counts = count_vect.fit_transform(lyrics[:1])
+X_train_counts = count_vect.fit_transform(lyrics)
 X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 
 # Encode genres
@@ -72,7 +70,7 @@ le = preprocessing.LabelEncoder()
 genres_encoded = le.fit_transform(labels)
 X_train, X_test, y_train, y_test = train_test_split(X_train_tfidf, genres_encoded, test_size=0.3)
 
-clf = MultinomialNB().fit(lyrics, labels)
+clf = MultinomialNB()
 clf.fit(X_train, y_train)
 
 # Predict

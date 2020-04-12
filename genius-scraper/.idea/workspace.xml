@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="690e65fd-37f6-4639-a4b6-ae0d8b85eeed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../classifiers/audio_feature_classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/../classifiers/audio_feature_classifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
