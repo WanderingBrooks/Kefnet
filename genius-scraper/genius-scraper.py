@@ -42,11 +42,8 @@ for song in data:
   song_json = {}
   song_json["Title"] = song['name'];
   song_json["Genre"] = song['genre'];
+  song_json["Id"] = song['trackID'];
   song_json["Lyrics"] = [];
-
-  #Extract Title of the song
-  for title in soup.findAll('title'):
-    song_json["Title"] = title.text.strip()
 
   #Extract the Lyrics of the song
   for div in soup.findAll('div', attrs = {'class': 'lyrics'}):

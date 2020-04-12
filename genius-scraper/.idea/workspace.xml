@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="690e65fd-37f6-4639-a4b6-ae0d8b85eeed" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../classifiers/audio_feature_classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/../classifiers/audio_feature_classifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bag_of_words.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/genius-scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/genius-scraper.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,12 +48,12 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="458" y="207" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586729721259">
-      <screen x="0" y="23" width="1440" height="811" />
+    <state x="458" y="207" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586734059479">
+      <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1586728039893" />
     <state x="458" y="207" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.811@0.23.1440.811" timestamp="1586729721259" />
-    <state x="458" y="207" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.813@0.23.1440.813" timestamp="1586729559689" />
+    <state x="458" y="207" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.813@0.23.1440.813" timestamp="1586734059479" />
     <state x="507" y="212" key="FileChooserDialogImpl" timestamp="1586366584582">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
