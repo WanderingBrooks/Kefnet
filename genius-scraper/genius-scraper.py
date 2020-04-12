@@ -43,7 +43,6 @@ for song in data:
   song_json["Title"] = song['name'];
   song_json["Genre"] = song['genre'];
   song_json["Lyrics"] = [];
-  song_json["Words"] = [];
 
   #Extract Title of the song
   for title in soup.findAll('title'):
@@ -53,14 +52,7 @@ for song in data:
   for div in soup.findAll('div', attrs = {'class': 'lyrics'}):
     lyrics = re.sub("[\(\[].*?[\)\]]", "", div.text).strip().split("\n");
     lyrics = list(filter(None, lyrics))
-
-    counts = Counter()
-    for bar in lyrics:
-      counts.update(word.strip('.,?!"\'').lower() for word in bar.split())
-
-    words = div.text.strip().split();
-    song_json["Lyrics"] = lyrics;
-    song_json["Words"] = counts.most_common();
+    song_json["Lyrics"] = ' '.join(lyrics);
 
   bag_of_words_json.append(song_json)
 
