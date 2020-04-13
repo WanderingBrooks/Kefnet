@@ -30,7 +30,6 @@ def get_labels_and_lyrics(data):
 
 b = open("../genius-scraper/bag_of_words.json", "r")
 bag_of_words_data = json.loads(b.read())
-print(len(bag_of_words_data))
 lyrics = get_labels_and_lyrics(bag_of_words_data)
 
 count_vect = CountVectorizer()
@@ -42,11 +41,10 @@ f = open("../spotify-data-fetcher/audio-features.json", "r")
 
 audio_features = json.loads(f.read())
 
-print(len(audio_features))
 
 labels, audio_features, genre_types = get_labels_and_features(audio_features)
 
-#print(len(audio_features), len(lyrics))
+print(len(audio_features), len(lyrics))
 
 features = hstack([tfidf, coo_matrix(audio_features)])
 
