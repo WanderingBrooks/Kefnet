@@ -4,6 +4,7 @@ from sklearn import preprocessing, svm, metrics
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
+import matplotlib.pyplot as plt
 
 def get_labels_and_features(data):
   labels = []
@@ -31,6 +32,8 @@ def get_labels_and_lyrics(data):
 b = open("../genius-scraper/bag_of_words.json", "r")
 bag_of_words_data = json.loads(b.read())
 lyrics = get_labels_and_lyrics(bag_of_words_data)
+
+print(len(lyrics))
 
 count_vect = CountVectorizer()
 tfidf_transformer = TfidfTransformer()
@@ -62,10 +65,15 @@ svm_CLF = svm.SVC(decision_function_shape='ovo') # One vs One Multi-class
 svm_CLF.fit(X_train, y_train)
 
 # Predict
-y_pred = svm_CLF.predict(X_test)
+
 
 # Get stats
-print(genre_types)
+#print(genre_types)
+
+disp = metrics.plot_confusion_matrix(svm_CLF, X_test, y_test, display_labels=genre_types, cmap=plt.cm.Blues)
+plt.show()
+
+y_pred = svm_CLF.predict(X_test)
 print(metrics.classification_report(y_test, y_pred))
 
 # b = open("../genius-scraper/bag_of_words.json", "r")
