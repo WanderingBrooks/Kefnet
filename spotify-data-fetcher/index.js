@@ -83,15 +83,19 @@ const SONGS_TO_SKIP = [
 
 const PLAYLIST_IDS = [
   // Easy to classify
-  '37i9dQZF1DXcBWIGoYBM5M', // Todays top hits
-  '37i9dQZF1DXcF6B6QPhFDv', // Rock this (Rock songs)
-  '37i9dQZF1DX0XUsuxWHRQd', // Rap Caviar
+  // '37i9dQZF1DXcBWIGoYBM5M', // Todays top hits
+  // '37i9dQZF1DXcF6B6QPhFDv', // Rock this (Rock songs)
+  // '37i9dQZF1DX0XUsuxWHRQd', // Rap Caviar
+  // '37i9dQZF1DWZjmJmeiazwd' // Rock gaming
+  '37i9dQZF1DX82Zzp6AKx64', // Power Balads
+  '37i9dQZF1DX1spT6G94GFC', // 80s rock anthems
+  '37i9dQZF1DWY4xHQp97fN6', // Get turnt "Rap"
+  '37i9dQZF1DX186v583rmzp' // I love my 90s Hip Hop
 
-  // More abstract
-  '37i9dQZF1DWSTeI2WWFaia', // Spilled Ink (Lyrical Lofi and Lowlife raps)
-  '37i9dQZF1DWWqNV5cS50j6', // Anti Pop
-  '54HYKeuOBm0CYSJPKHwYEt', // TikTok Songs
-  '37i9dQZF1DWZjmJmeiazwd' // Rock gaming
+  // // More abstract
+  // '37i9dQZF1DWSTeI2WWFaia', // Spilled Ink (Lyrical Lofi and Lowlife raps)
+  // '37i9dQZF1DWWqNV5cS50j6', // Anti Pop
+  // '54HYKeuOBm0CYSJPKHwYEt', // TikTok Songs
 ];
 
 const sleep = ms => new Promise( resolve => setTimeout( resolve, ms ) );
