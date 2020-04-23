@@ -19,7 +19,7 @@ import ast
 import os
 from urllib.request import Request, urlopen
 
-with open('audio-features.json', 'r') as song_list:
+with open('../spotify-data-fetcher/audio-features.json', 'r') as song_list:
   data = json.load(song_list)
 
 bag_of_words_json = []
@@ -39,20 +39,17 @@ for song in data:
   html = soup.prettify('utf-8')
 
   # Objects for holding song data
-  song_json = {}
-  song_json["Title"] = song['name'];
-  song_json["Genre"] = song['genre'];
-  song_json["Id"] = song['trackID'];
-  song_json["Lyrics"] = [];
+  song['lyrics'] = [];
 
   #Extract the Lyrics of the song
   for div in soup.findAll('div', attrs = {'class': 'lyrics'}):
     lyrics = re.sub("[\(\[].*?[\)\]]", "", div.text).strip().split("\n");
     lyrics = list(filter(None, lyrics))
-    song_json["Lyrics"] = ' '.join(lyrics);
+    song['lyrics'] = ' '.join(lyrics);
 
-  bag_of_words_json.append(song_json)
+  if len(song['lyrics']) > 0:
+    bag_of_words_json.append(song)
 
 #Save the json created with the file name as title + .json
-with open('bag_of_words.json', 'w') as outfile:
+with open('features.json', 'w') as outfile:
   json.dump(bag_of_words_json, outfile, indent = 4, ensure_ascii = False)
